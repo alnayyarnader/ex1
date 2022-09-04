@@ -3,16 +3,34 @@
 version: 2.1
 # Use a package of configuration called an orb.
 jobs:
+
+  #my first job
   print_hello:
     docker:
       - image: circleci/node:13.8.0
     steps:
       - run: echo hello
+  
+  #my 2nd job
   print_world:
     docker:
       - image: circleci/node:13.8.0
     steps:
       - run: echo world
+
+  #my 3rd job="test_env"
+  test_env:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - checkout
+      - run:
+          name: "displaying my first env"
+          command: |
+            echo $My_First_ENV
+    
+
+      
 workflows:
   # Name the workflow "welcome"
   welcome:
@@ -22,3 +40,5 @@ workflows:
       - print_world:
           requires:
             - print_hello
+      - test_env
+    
