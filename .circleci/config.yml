@@ -22,7 +22,7 @@ jobs:
           name: "save output to output.txt"
           command: |
             pwd
-            echo "text to output here" > output.txt
+            echo "text to output here" > /tmp/workspace/output.txt
 
       - persist_to_workspace:
           root: /tmp/workspace
@@ -31,7 +31,7 @@ jobs:
 
 
 
-  receive_hello_world_output:
+  print_output_file:
     docker:
       - image: circleci/node:13.8.0
     steps:
@@ -70,9 +70,6 @@ jobs:
     
   
 
-
-
-
 workflows:
   # Name the workflow "welcome"
   welcome:
@@ -83,7 +80,7 @@ workflows:
           requires:
             - print_hello
       - test_env
-      - receive_hello_world_output:
+      - print_output_file:
           requires:
             - save_hello_world_output
 
