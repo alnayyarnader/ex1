@@ -32,7 +32,7 @@ jobs:
 
 
   receive_hello_world_output:
-      docker:
+    docker:
       - image: circleci/node:13.8.0
     steps:
       - checkout
