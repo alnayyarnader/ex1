@@ -11,7 +11,41 @@ jobs:
     steps:
       - checkout
       - run: echo hello
-  
+
+
+  save_hello_world_output:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - checkout
+      - run:
+          name: "save output to output.txt"
+          command: |
+            pwd
+            echo "text to output here" > output.txt
+
+      - persist_to_workspace:
+          root: /tmp/workspace
+          paths:
+          - /output.txt
+
+
+
+  receive_hello_world_output:
+      docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - checkout
+      - attach_workspace:
+        at: /tmp/workspace
+      
+      - run:
+          name: "receive the workspace data"
+          command: |
+            pwd
+            ls /tmp/workspace
+            cat /tmp/workspace/output.txt
+
 
   #my 2nd job
   print_world:
@@ -20,6 +54,8 @@ jobs:
     steps:
       - checkout
       - run: echo world
+
+
 
   #my 3rd job="test_env"
   test_env:
@@ -32,7 +68,11 @@ jobs:
           command: |
             echo $My_First_ENV
     
-   
+  
+
+
+
+
 workflows:
   # Name the workflow "welcome"
   welcome:
@@ -43,4 +83,8 @@ workflows:
           requires:
             - print_hello
       - test_env
+      - receive_hello_world_output:
+          requires:
+            - save_hello_world_output
+
     
