@@ -10,7 +10,7 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - checkout
-      - run: echo hello
+      - run: echo "hello"
 
 
   save_hello_world_output:
@@ -53,7 +53,7 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - checkout
-      - run: echo world
+      - run: echo "world"
 
 
 
