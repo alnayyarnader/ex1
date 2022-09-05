@@ -27,7 +27,7 @@ jobs:
       - persist_to_workspace:
           root: /tmp/workspace
           paths:
-          - /output.txt
+            - /output.txt
 
 
 
@@ -37,7 +37,7 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-        at: /tmp/workspace
+          at: /tmp/workspace
       
       - run:
           name: "receive the workspace data"
