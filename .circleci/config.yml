@@ -22,10 +22,10 @@ jobs:
           name: "save output to output.txt"
           command: |
             pwd
-            echo "text to output here" > /tmp/workspace/output.txt
+            echo "text to output here" > ~/output.txt
 
       - persist_to_workspace:
-          root: /tmp/workspace
+          root: ~/
           paths:
             - output.txt
 
@@ -37,14 +37,14 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: /tmp/workspace
+          at: ~/
       
       - run:
           name: "receive the workspace data"
           command: |
             pwd
-            ls /tmp/workspace
-            cat /tmp/workspace/output.txt
+            ls
+            cat ~/output.txt
 
 
   #my 2nd job
