@@ -22,10 +22,10 @@ jobs:
           name: "save output to output.txt"
           command: |
             pwd
-            echo "text to output here" > /tmp/workspace/output.txt
+            echo "text to output here" > /home/circleci/project/output.txt
 
       - persist_to_workspace:
-          root: /tmp/workspace
+          root: /home/circleci/project
           paths:
             - output.txt
 
@@ -36,14 +36,14 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: /tmp/workspace
+          at: /home/circleci/project
       
       - run:
           name: "receive the workspace data"
           command: |
             pwd
             ls
-            cat /tmp/workspace/output.txt
+            cat /home/circleci/project/output.txt
 
 
   #my 2nd job
