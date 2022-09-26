@@ -1,123 +1,44 @@
 
 # Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
-# Use a package of configuration called an orb.
-
-
-commands:
-  print_pipeline_id:
-    description: "A very simple command for prints the Circle CI Workflow ID"
-    parameters:
-        variable1:
-          type: string
-          default: "null value"
-    steps:
-        - run: echo << parameters.variable1 >>
 
 jobs:
 
-  #my first job
-  print_hello:
+  build:
     docker:
       - image: circleci/node:13.8.0
     steps:
       - checkout
-      - run: echo "hello"
-      - print_pipeline_id:
-          variable1: $CIRCLE_WORKFLOW_ID
+      - run: npm run test
 
 
-  #job for failure testing
-  test_failure:
+  test:
     docker:
       - image: circleci/node:13.8.0
     steps:
       - checkout
-      #this run will have the main executable commands
-      - run:
-          name: this is my commmands to be executed
-          command: |
-            echo "this data will be generated here" > notexist.txt
-            pwd
-            ls -lahi
-            cat notexist.txt
-      #this run incase of previous run is failed
-      - run:
-          name: this will be run incase of previous run generates non-zero exist code
-          command: |
-            pwd 
-            echo "previous step failed, take care :D" 
-          when: on_fail
+      - run: npm run lint
 
 
-  save_hello_world_output:
+  analyze:
     docker:
       - image: circleci/node:13.8.0
     steps:
       - checkout
-      - run:
-          name: "save output to output.txt"
-          command: |
-            pwd
-            echo "text to output here" > /home/circleci/project/output.txt
-
-      - persist_to_workspace:
-          root: /home/circleci/project
-          paths:
-            - output.txt
+      - run: npm audit
 
 
-  print_output_file:
-    docker:
-      - image: circleci/node:13.8.0
-    steps:
-      - checkout
-      - attach_workspace:
-          at: /home/circleci/project
-      
-      - run:
-          name: "receive the workspace data"
-          command: |
-            pwd
-            ls
-            cat /home/circleci/project/output.txt
-
-
-  #my 2nd job
-  print_world:
-    docker:
-      - image: circleci/node:13.8.0
-    steps:
-      - checkout
-      - run: echo "world"
-
-
-  #my 3rd job="test_env"
-  test_env:
-    docker:
-      - image: circleci/node:13.8.0
-    steps:
-      - checkout
-      - run:
-          name: "displaying my first env"
-          command: |
-            echo $My_First_ENV
-    
   
 workflows:
   # Name the workflow "welcome"
   welcome:
-    # Run the welcome/run job in its own container
     jobs:
-      - print_hello
-      - print_world:
+      - build
+      - test:
           requires:
-           - print_hello
-      - test_env
-      - save_hello_world_output
-      - print_output_file:
+           - build
+      - analyze:
           requires:
-            - save_hello_world_output
-      - test_failure
+            - test
 
     
