@@ -2,21 +2,20 @@
 # Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 # Use a package of configuration called an orb.
-jobs:
 
-  
-  commands:
-    print_pipeline_id:
-      description: "A very simple command for demonstration purposes"
-      parameters:
+
+commands:
+  print_pipeline_id:
+    description: "A very simple command for prints the Circle CI Workflow ID"
+    parameters:
         variable1:
           type: string
           default: "null value"
-      steps:
+    steps:
         - run: echo << parameters.variable1 >>
-  
-  
-  
+
+jobs:
+
   #my first job
   print_hello:
     docker:
