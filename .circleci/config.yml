@@ -4,6 +4,19 @@ version: 2.1
 # Use a package of configuration called an orb.
 jobs:
 
+  
+  commands:
+    print_pipeline_id:
+      description: "A very simple command for demonstration purposes"
+      parameters:
+        variable1:
+          type: string
+          default: "null value"
+      steps:
+        - run: echo << parameters.variable1 >>
+  
+  
+  
   #my first job
   print_hello:
     docker:
@@ -11,6 +24,8 @@ jobs:
     steps:
       - checkout
       - run: echo "hello"
+      - print_pipeline_id:
+          variable1: $CIRCLE_WORKFLOW_ID
 
 
   save_hello_world_output:
