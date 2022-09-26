@@ -33,14 +33,20 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - checkout
-      - run: cat /circleci/project/notexist.txt
+      #this run will have the main executable commands
+      - run:
+          name: this is my commmands to be executed
+          command: |
+            echo "this data will be generated here" > notexist.txt
+            pwd
+            ls -lahi
+            cat notexist.txt
       #this run incase of previous run is failed
       - run:
-          name: this will be run incase of previous run non zero exist code
+          name: this will be run incase of previous run generates non-zero exist code
           command: |
             pwd 
-            echo "previous step failed, take care :D"
-          
+            echo "previous step failed, take care :D" 
           when: on_fail
 
 
