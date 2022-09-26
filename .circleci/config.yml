@@ -27,6 +27,23 @@ jobs:
           variable1: $CIRCLE_WORKFLOW_ID
 
 
+  #job for failure testing
+  test_failure:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - checkout
+      - run: cat /circleci/project/notexist.txt
+      #this run incase of previous run is failed
+      - run:
+          name: this will be run incase of previous run non zero exist code
+          command: |
+            pwd 
+            echo "previous step failed, take care :D"
+          
+          when: on_fail
+
+
   save_hello_world_output:
     docker:
       - image: circleci/node:13.8.0
@@ -95,5 +112,6 @@ workflows:
       - print_output_file:
           requires:
             - save_hello_world_output
+      - test_failure
 
     
