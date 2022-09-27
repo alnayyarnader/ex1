@@ -9,7 +9,10 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - checkout
-      - run: npm run lint
+      - run:
+          command: | 
+              npm i
+              npm run lint
 
 
   test:
@@ -17,18 +20,23 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - checkout
-      - run: npm run test
+      - run:
+          command: |
+            npm i
+            npm run test
 
-
+#mod for run
   analyze:
     docker:
       - image: circleci/node:13.8.0
     steps:
       - checkout
-      - run: npm audit
+      - run:
+          command: |
+            npm -v
+            npm audit
 
 
-  
 workflows:
   # Name the workflow "welcome"
   welcome:
