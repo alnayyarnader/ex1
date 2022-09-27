@@ -34,7 +34,7 @@ jobs:
       - run:
           command: |
             npm -v
-            npm audit
+            echo "testing"
 
 
 workflows:
