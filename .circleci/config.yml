@@ -31,10 +31,8 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - checkout
-      - run:
-          command: |
-            npm -v
-            echo "testing"
+      - run: npm -v
+      - run: npm build
 
 
 workflows:
