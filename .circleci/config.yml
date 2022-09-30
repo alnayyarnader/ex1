@@ -24,7 +24,9 @@ jobs:
             pwd
             aws ec2 describe-instances \
             --query 'Reservations[*].Instances[*].PublicIpAddress' \
-            --output text
+            --output text >> ~/project/ex1/inventory.txt
+            cat inventory.txt
+
             
 
  # test:
