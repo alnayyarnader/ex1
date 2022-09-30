@@ -18,6 +18,9 @@ jobs:
             sudo apt update
             sudo apt install python3 python3-pip 
             sudo apt install awscli   
+           
+      - run:
+          command: |
             pwd
             ls -tlahi
             find -type f -iname "config.yml"
