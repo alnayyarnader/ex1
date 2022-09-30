@@ -21,14 +21,14 @@ jobs:
             pwd
             ls -tlahi
             find -type f -iname "config.yml"
-            echo "[all]" > ~/circleci/project/ex1/inventory.txt
+            echo "[all]" > ~/project/ex1/inventory.txt
             aws ec2 describe-instances \
             --query 'Reservations[*].Instances[*].PublicIpAddress' \
             --filters "Name=tag:Project,Values=udacity" \
-            --output text >> ~/circleci/project/ex1/inventory.txt
-            cd ~/circleci/project/ex1
+            --output text >> ~/project/ex1/inventory.txt
+            cd ~/project/ex1
             ls -tlahi
-            cat ~/circleci/project/ex1/inventory.txt
+            cat ~/project/ex1/inventory.txt
             
 
  # test:
