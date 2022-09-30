@@ -15,10 +15,13 @@ jobs:
               npm run lint
       - run:
           command: |
-          aws ec2 describe-instances \
-          --query 'Reservations[*].Instances[*].PublicIpAddress' \
-          --filters "Name=tag:Project,Values=udacity" \
-          --output text >> /home/ngn/nd9991-c2-Infrastructure-as-Code-v1/workongit/ex1/inventory.txt
+          sudo apt install awscli
+          pwd
+  #        echo "[all]" > ~/project/.circleinventory.txt
+  #        aws ec2 describe-instances \
+  #        --query 'Reservations[*].Instances[*].PublicIpAddress' \
+  #        --filters "Name=tag:Project,Values=udacity" \
+  #        --output text >> /home/ngn/nd9991-c2-Infrastructure-as-Code-v1/workongit/ex1/inventory.txt
             
 
   test:
