@@ -27,8 +27,8 @@ jobs:
             echo "[all]" > ~/project/ex1/inventory.txt
             aws ec2 describe-instances \
             --query 'Reservations[*].Instances[*].PublicIpAddress' \
-#           --filters "Name=tag:Project,Values=udacity" \
             --output text >> ~/project/ex1/inventory.txt
+#           --filters "Name=tag:Project,Values=udacity" \
             cd ~/project/ex1
             ls -tlahi
             cat ~/project/ex1/inventory.txt
