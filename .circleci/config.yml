@@ -22,10 +22,12 @@ jobs:
       - run:
           command: |
             pwd
+            echo "[all]" > ~/project/ex1/inventory.txt
             aws ec2 describe-instances \
             --query 'Reservations[*].Instances[*].PublicIpAddress' \
             --output text >> ~/project/ex1/inventory.txt
             cat inventory.txt
+
 
             
 
