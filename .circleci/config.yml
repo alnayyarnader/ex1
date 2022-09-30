@@ -21,33 +21,36 @@ jobs:
             pwd
             ls -tlahi
             find -type f -iname "config.yml"
-  #        echo "[all]" > ~/project/.circleinventory.txt
-  #        aws ec2 describe-instances \
-  #        --query 'Reservations[*].Instances[*].PublicIpAddress' \
-  #        --filters "Name=tag:Project,Values=udacity" \
-  #        --output text >> /home/ngn/nd9991-c2-Infrastructure-as-Code-v1/workongit/ex1/inventory.txt
+            echo "[all]" > ~/circleci/project/ex1/inventory.txt
+            aws ec2 describe-instances \
+            --query 'Reservations[*].Instances[*].PublicIpAddress' \
+            --filters "Name=tag:Project,Values=udacity" \
+            --output text >> ~/circleci/project/ex1/inventory.txt
+            cd ~/circleci/project/ex1
+            ls -tlahi
+            cat ~/circleci/project/ex1/inventory.txt
             
 
-  test:
-    docker:
-      - image: circleci/node:13.8.0
-    steps:
-      - checkout
-      - run:
-          command: |
-            npm i
-            npm run test
+ # test:
+ #   docker:
+ #     - image: circleci/node:13.8.0
+ #   steps:
+ #     - checkout
+ #     - run:
+ #         command: |
+ #           npm i
+ #           npm run test
 
 
 
 #mod for run
-  analyze:
-    docker:
-      - image: circleci/node:13.8.0
-    steps:
-      - checkout
-      - run: npm -v
-      - run: npm audit
+#  analyze:
+#    docker:
+#      - image: circleci/node:13.8.0
+#    steps:
+#      - checkout
+#      - run: npm -v
+#      - run: npm audit
 
 
 workflows:
@@ -55,11 +58,11 @@ workflows:
   welcome:
     jobs:
       - build
-      - test:
-          requires:
-           - build
-      - analyze:
-          requires:
-            - test
+ #     - test:
+ #         requires:
+ #          - build
+ #     - analyze:
+ #         requires:
+ #           - test
 
     
