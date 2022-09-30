@@ -15,8 +15,8 @@ jobs:
               npm run lint
       - run:
           command: |
-          sudo apt install awscli
-          pwd
+            sudo apt install awscli
+            pwd
   #        echo "[all]" > ~/project/.circleinventory.txt
   #        aws ec2 describe-instances \
   #        --query 'Reservations[*].Instances[*].PublicIpAddress' \
