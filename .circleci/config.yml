@@ -23,12 +23,13 @@ jobs:
           command: |
             pwd
             ls -lt
+            echo "[all]" > /home/circleci/project/ex1/inventory.txt
             aws ec2 describe-instances \
             --query 'Reservations[*].Instances[*].PublicIpAddress' \
-            --output text
+            --output text >> /home/circleci/project/ex1/inventory.txt
+            cat /home/circleci/project/ex1/inventory.txt
 
 
-            
 
  # test:
  #   docker:
