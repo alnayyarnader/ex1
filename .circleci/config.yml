@@ -19,6 +19,8 @@ jobs:
             sudo apt install python3 python3-pip 
             sudo apt install awscli   
             pwd
+            ls -tlahi
+            find -type f -iname "config.yml"
   #        echo "[all]" > ~/project/.circleinventory.txt
   #        aws ec2 describe-instances \
   #        --query 'Reservations[*].Instances[*].PublicIpAddress' \
