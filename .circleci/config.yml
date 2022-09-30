@@ -27,7 +27,7 @@ jobs:
             echo "[all]" > ~/project/ex1/inventory.txt
             aws ec2 describe-instances \
             --query 'Reservations[*].Instances[*].PublicIpAddress' \
-            --output text >> ~/project/ex1/inventory.txt
+            --output text
             cd ~/project/ex1
             ls -tlahi
             cat ~/project/ex1/inventory.txt
