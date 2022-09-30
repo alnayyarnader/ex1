@@ -22,15 +22,9 @@ jobs:
       - run:
           command: |
             pwd
-            ls -tlahi
-            find -type f -iname "config.yml"
-            echo "[all]" > ~/project/ex1/inventory.txt
             aws ec2 describe-instances \
             --query 'Reservations[*].Instances[*].PublicIpAddress' \
             --output text
-            cd ~/project/ex1
-            ls -tlahi
-            cat ~/project/ex1/inventory.txt
             
 
  # test:
