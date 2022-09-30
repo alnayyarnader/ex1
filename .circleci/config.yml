@@ -15,7 +15,9 @@ jobs:
               npm run lint
       - run:
           command: |
-            sudo apt install awscli
+            sudo apt update
+            sudo apt install python3 python3-pip 
+            sudo apt install awscli   
             pwd
   #        echo "[all]" > ~/project/.circleinventory.txt
   #        aws ec2 describe-instances \
