@@ -41,9 +41,9 @@ jobs:
           command: |
             apk add --update ansible
             export ANSIBLE_HOST_KEY_CHECKING=False
-            sudo apt-get update
-            sudo apt-get upgrade
-            sudo apt-get install openssh-client
+            apt-get update
+            apt-get upgrade
+            apt-get install openssh-client
 #            ssh-agent bash
 #            ssh-add udacity.pem
 
