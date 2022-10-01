@@ -17,11 +17,34 @@ jobs:
       - run:
           name: Create Cloudformation Stack
           command: |
-            aws cloudformation deploy \
-            --template-file template.yml \
-            --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:5} \
-            --region us-east-1
+#            aws cloudformation deploy \
+#            --template-file template.yml \
+#            --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:5} \
+#            --region us-east-1
+            echo ["all"] > ./ex2/inventory.txt
+            aws ec2 describe-instances \
+            --query 'Reservations[*].Instances[*].PublicIpAddress' \
+            --output text >> ./ex2/inventory.txt
+            cat ./ex2/inventory.txt
 
+
+  configure_infrastructure: 
+    docker:
+    - image: python:3.7-alpine3.11
+    steps:
+      - checkout
+      - add_ssh_keys:
+        # You can get this ID in the section where you registered the SSH Key
+          fingerprints: ["3b:e0:b7:d5:64:e3:33:35:c8:36:ac:94:e8:6a:e6:2d"]
+      - run:
+          name: Install Ansible
+          command: |
+            apk add --update ansible
+            
+      - run:
+          name: Run Playbook and Configure server
+          command: |
+          ansible-playbook -i ./ex2/inventory.txt ./ex2/main-remote.yml
 
 # Sequential workflow
 workflows:
@@ -29,3 +52,5 @@ workflows:
   myWorkflow:
     jobs:
       - create_infrastructure
+      - configure_infrastructure
+      
