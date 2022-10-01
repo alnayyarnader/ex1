@@ -40,10 +40,10 @@ jobs:
           name: Install Ansible
           command: |
             apk add --update ansible
+            apk add openssh
+            service sshd start
             export ANSIBLE_HOST_KEY_CHECKING=False
-            apt-get update
-            apt-get upgrade
-            apt-get install openssh-client
+
 #            ssh-agent bash
 #            ssh-add udacity.pem
 
