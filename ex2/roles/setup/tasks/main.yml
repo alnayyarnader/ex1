@@ -43,3 +43,4 @@
 - name: Executing node
   shell: |
     pm2 start ~/web/index.js -f
+    echo 'service started'
