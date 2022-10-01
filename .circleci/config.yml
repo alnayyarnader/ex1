@@ -20,7 +20,7 @@ jobs:
             echo ["all"] > ./ex2/inventory.txt
             aws ec2 describe-instances \
             --query 'Reservations[*].Instances[*].PublicIpAddress' \
-            --output text >> ./ex2/inventory.txt
+            --output text >>./ex2/inventory.txt
             cat ./ex2/inventory.txt
 #            aws cloudformation deploy \
 #            --template-file template.yml \
