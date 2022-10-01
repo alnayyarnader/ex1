@@ -44,6 +44,7 @@ jobs:
       - run:
           name: Run Playbook and Configure server
           command: |
+            cat ./ex2/inventory.txt
             ansible-playbook -i ./ex2/inventory.txt ./ex2/main-remote.yml
 
 # Sequential workflow
