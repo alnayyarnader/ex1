@@ -41,11 +41,8 @@ jobs:
           command: |
             apk add --update ansible
             apk add openssh
-            service sshd start
             export ANSIBLE_HOST_KEY_CHECKING=False
 
-#            ssh-agent bash
-#            ssh-add udacity.pem
 
             
       - run:
