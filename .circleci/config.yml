@@ -41,6 +41,9 @@ jobs:
           command: |
             apk add --update ansible
             export ANSIBLE_HOST_KEY_CHECKING=False
+            ssh-agent bash
+            ssh-add udacity.pem
+
             
       - run:
           name: Run Playbook and Configure server
